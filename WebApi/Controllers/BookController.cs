@@ -1,25 +1,26 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using FluentValidation;
-using WebApi.BookOperations.CreateBook;
-using static WebApi.BookOperations.CreateBook.CreateBookCommand;
-using WebApi.BookOperations.GetBookDetail;
-using WebApi.BookOperations.GetBooks;
 using WebApi.DbOperations;
-using WebApi.BookOperations.UpdateBook;
-using static WebApi.BookOperations.UpdateBook.UpdateBookCommand;
-using WebApi.BookOperations.DeleteBook;
+using WebApi.Application.BookOperations.Queries.GetBooks;
+using WebApi.Application.BookOperations.Queries.GetBookDetail;
+using Microsoft.AspNetCore.Authorization;
+using WebApi.Application.BookOperations.Commands.CreateBook;
+using WebApi.Application.BookOperations.Commands.UpdateBook;
+using static WebApi.Application.BookOperations.Commands.UpdateBook.UpdateBookCommand;
+using WebApi.Application.BookOperations.Commands.DeleteBook;
 
 namespace WebApi.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]s")]
     public class BookController : ControllerBase
     {
 
-        private readonly BookStoreDbContext _context;
+        private readonly IBookStoreDbContext _context;
         private readonly IMapper _mapper;
-        public BookController(BookStoreDbContext context, IMapper mapper)
+        public BookController(IBookStoreDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

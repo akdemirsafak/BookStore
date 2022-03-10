@@ -6,10 +6,10 @@ namespace WebApi.Application.AuthorOperations.Commands.CreateAuthor
 {
     public class CreateAuthorCommand
     {
-        private readonly BookStoreDbContext _context;
+        private readonly IBookStoreDbContext _context;
         private readonly IMapper _mapper;
         public CreateAuthorModel Model;
-        public CreateAuthorCommand(BookStoreDbContext context, IMapper mapper)
+        public CreateAuthorCommand(IBookStoreDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -20,7 +20,7 @@ namespace WebApi.Application.AuthorOperations.Commands.CreateAuthor
             var author=_context.Authors.FirstOrDefault(x=>x.Name.Trim()==Model.Name.Trim() && x.LastName.Trim() ==Model.LastName.Trim());
             if (author is not null)
             {
-                throw new Exception("Bu yazar zaten kayıtlı.");
+                throw new InvalidOperationException("This author already have.");
             }
             author=_mapper.Map<Author>(Model);
             _context.Authors.Add(author);

@@ -1,16 +1,15 @@
 using AutoMapper;
-
 using WebApi.Application.AuthorOperations.Commands.CreateAuthor;
 using WebApi.Application.AuthorOperations.Queries.GetAuthorDetail;
 using WebApi.Application.AuthorOperations.Queries.GetAuthors;
 using WebApi.Application.GenreOperations.Commands.CreateGenre;
-using WebApi.Application.GenreOperations.Commands.UpdateGenre;
 using WebApi.Application.GenreOperations.Queries.GetGenreDetail;
 using WebApi.Application.GenreOperations.Queries.GetGenres;
-using WebApi.BookOperations.GetBooks;
 using WebApi.Entities;
-using static WebApi.BookOperations.CreateBook.CreateBookCommand;
-using static WebApi.BookOperations.GetBookDetail.GetBookDetailQuery;
+using WebApi.Application.BookOperations.Queries.GetBookDetail;
+using WebApi.Application.BookOperations.Queries.GetBooks;
+using WebApi.Application.BookOperations.Commands.CreateBook;
+using WebApi.Application.UserOperations.Commands.CreateUser;
 
 namespace WebApi.Common
 {
@@ -41,6 +40,9 @@ namespace WebApi.Common
             CreateMap<Author,AuthorDetailViewModel>().ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => (src.BirthDate).ToString("dd.MM.yyyy")));
             //.ForMember(dest => dest.Books, opt => opt.MapFrom(src => src.Books));
             CreateMap<CreateAuthorModel,Author>();
+
+            //
+            CreateMap<CreateUserModel,User>();
 
         }
         
